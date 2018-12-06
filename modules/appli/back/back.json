@@ -1,0 +1,19 @@
+[
+  {
+    "name": "back",
+    "image": "${image}",
+    "cpu": 4,
+    "memory": 512,
+    "essential": true,
+    "portMappings": [
+      {
+        "containerPort": 8080,
+        "hostPort": 8080
+      }
+    ],
+    "command": [
+      "--spring.profiles.active=production",
+      "--server.servlet.context-path=/api"
+    ]
+  }
+]
