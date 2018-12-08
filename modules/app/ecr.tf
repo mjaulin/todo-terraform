@@ -1,6 +1,6 @@
 
 resource "aws_ecr_repository" "ecr" {
-  name = "${var.default_tags["Project"]}-${var.app_name}"
+  name = "${var.app_name}"
 }
 
 resource "aws_ecr_lifecycle_policy" "ecr-lp" {

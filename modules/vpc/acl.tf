@@ -11,35 +11,8 @@ resource "aws_network_acl" "acl-pub" {
 
   ingress {
     action = "allow"
-    from_port = 80
-    to_port = 80
-    protocol = "tcp"
-    rule_no = 100
-    cidr_block = "0.0.0.0/0"
-  }
-
-  ingress {
-    action = "allow"
-    from_port = 443
-    to_port = 443
-    protocol = "tcp"
-    rule_no = 110
-    cidr_block = "0.0.0.0/0"
-  }
-
-  ingress {
-    action = "allow"
-    from_port = 32768
+    from_port = 0
     to_port = 65535
-    protocol = "tcp"
-    rule_no = 130
-    cidr_block = "0.0.0.0/0"
-  }
-
-  egress {
-    action = "allow"
-    from_port = 80
-    to_port = 80
     protocol = "tcp"
     rule_no = 100
     cidr_block = "0.0.0.0/0"
@@ -47,19 +20,10 @@ resource "aws_network_acl" "acl-pub" {
 
   egress {
     action = "allow"
-    from_port = 443
-    to_port = 443
-    protocol = "tcp"
-    rule_no = 110
-    cidr_block = "0.0.0.0/0"
-  }
-
-  egress {
-    action = "allow"
-    from_port = 32768
+    from_port = 0
     to_port = 65535
     protocol = "tcp"
-    rule_no = 120
+    rule_no = 100
     cidr_block = "0.0.0.0/0"
   }
 
@@ -72,26 +36,8 @@ resource "aws_network_acl" "acl-priv" {
 
   ingress {
     action = "allow"
-    from_port = 8080
-    to_port = 8080
-    protocol = "tcp"
-    rule_no = 100
-    cidr_block = "${var.cidr_block}"
-  }
-
-  ingress {
-    action = "allow"
-    from_port = 1024
+    from_port = 0
     to_port = 65535
-    protocol = "tcp"
-    rule_no = 130
-    cidr_block = "0.0.0.0/0"
-  }
-
-  egress {
-    action = "allow"
-    from_port = 80
-    to_port = 80
     protocol = "tcp"
     rule_no = 100
     cidr_block = "0.0.0.0/0"
@@ -99,20 +45,11 @@ resource "aws_network_acl" "acl-priv" {
 
   egress {
     action = "allow"
-    from_port = 443
-    to_port = 443
-    protocol = "tcp"
-    rule_no = 110
-    cidr_block = "0.0.0.0/0"
-  }
-
-  egress {
-    action = "allow"
-    from_port = 32768
+    from_port = 0
     to_port = 65535
     protocol = "tcp"
-    rule_no = 120
-    cidr_block = "${var.cidr_block}"
+    rule_no = 100
+    cidr_block = "0.0.0.0/0"
   }
 
   tags = "${merge(var.default_tags, map("Name", "acl-priv"))}"

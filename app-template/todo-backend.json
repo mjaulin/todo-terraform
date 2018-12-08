@@ -1,0 +1,26 @@
+[
+  {
+    "name": "todo-backend",
+    "image": "${image}",
+    "essential": true,
+    "networkMode": "awsvpc",
+    "portMappings": [
+      {
+        "containerPort": ${port},
+        "hostPort": ${port}
+      }
+    ],
+    "command": [
+      "--spring.profiles.active=production",
+      "--server.servlet.context-path=/api"
+    ],
+    "logConfiguration": {
+      "logDriver": "awslogs",
+      "options": {
+        "awslogs-group": "${log-group}",
+        "awslogs-region": "${region}",
+        "awslogs-stream-prefix": "${log-prefix}"
+      }
+    }
+  }
+]

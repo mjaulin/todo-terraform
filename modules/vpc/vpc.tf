@@ -7,7 +7,7 @@ resource "aws_vpc" "vpc" {
 
 resource "aws_subnet" "subnets-pub" {
   count             = "${length(var.availability_zones)}"
-  cidr_block        = "${cidrsubnet(aws_vpc.vpc.cidr_block, 3, count.index)}"
+  cidr_block        = "${cidrsubnet(aws_vpc.vpc.cidr_block, length(var.availability_zones), count.index)}"
   availability_zone = "${element(var.availability_zones, count.index)}"
   vpc_id            = "${aws_vpc.vpc.id}"
 
@@ -16,7 +16,7 @@ resource "aws_subnet" "subnets-pub" {
 
 resource "aws_subnet" "subnets-priv" {
   count             = "${length(var.availability_zones)}"
-  cidr_block        = "${cidrsubnet(aws_vpc.vpc.cidr_block, 3, count.index + 1 + aws_subnet.subnets-pub.count)}"
+  cidr_block        = "${cidrsubnet(aws_vpc.vpc.cidr_block, length(var.availability_zones), count.index + length(var.availability_zones))}"
   availability_zone = "${element(var.availability_zones, count.index)}"
   vpc_id            = "${aws_vpc.vpc.id}"
 
